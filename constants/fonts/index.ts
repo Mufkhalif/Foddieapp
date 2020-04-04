@@ -10,6 +10,12 @@ export const subtitleFood = {
   color: '#fff',
 };
 
+export const descRegion = {
+  fontSize: 12,
+  fontFamily: 'Poppins',
+  color: '#fff',
+};
+
 export const subsemititleFood = {
   fontSize: 14,
   fontFamily: 'Poppins-SemiBold',
