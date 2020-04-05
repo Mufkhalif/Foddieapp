@@ -20,7 +20,7 @@ import Home from './pages/home/home';
 import Location from './pages/location/';
 import Favourite from './pages/favourite/';
 import Account from './pages/account/';
-import Detail from './pages/home/detail';
+import Detail from './pages/detailfood/Detail';
 import AllFood from './pages/allfood/AlFood';
 
 const {width} = Dimensions.get('window');

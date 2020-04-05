@@ -8,7 +8,7 @@ import {
   FlatList,
   StyleSheet,
 } from 'react-native';
-import {useTimingTransition} from 'react-native-redash';
+import {useTimingTransition, useSpringTransition} from 'react-native-redash';
 import Animated, {
   Value,
   interpolate,
@@ -27,13 +27,16 @@ import {faStar} from '@fortawesome/free-solid-svg-icons';
 import {
   TouchableNativeFeedback,
   TouchableWithoutFeedback,
+  TouchableOpacity,
 } from 'react-native-gesture-handler';
 
 const {width} = Dimensions.get('window');
 
 interface FoodI {
-  id: number;
+  id?: number;
   item: FoodType;
+  navigation: any;
+  key: number;
 }
 
 interface FoodType {
@@ -43,10 +46,10 @@ interface FoodType {
   place: number;
 }
 
-export default ({id, item}: FoodI) => {
+export default ({key, item, navigation, id}: FoodI) => {
   const [isOpen, setOpen] = useState(false);
 
-  const status = useTimingTransition(isOpen, {duration: 200 * id});
+  const status = useSpringTransition(isOpen);
 
   const transX = interpolate(status, {
     inputRange: [0, 1],
@@ -66,7 +69,7 @@ export default ({id, item}: FoodI) => {
       <Animated.View
         style={{
           ...styles.card,
-          // transform: [{translateX: transX}],
+          transform: [{translateX: transX}],
         }}>
         <View style={styles.leftContent}>
           <Image source={{uri: item.url}} style={{flex: 1}} />
@@ -88,6 +91,19 @@ export default ({id, item}: FoodI) => {
               Rp. 32.000
             </Text>
           </View>
+          <TouchableOpacity>
+            <View
+              style={{
+                marginTop: 10,
+                backgroundColor: '#FFC357',
+                width: 50,
+                alignItems: 'center',
+                paddingVertical: 5,
+                borderRadius: 5,
+              }}>
+              <Text>Buy</Text>
+            </View>
+          </TouchableOpacity>
         </View>
       </Animated.View>
     </TouchableWithoutFeedback>
@@ -107,7 +123,7 @@ const styles = StyleSheet.create({
   card: {
     marginTop: 10,
     width: width - 15,
-    height: 110,
+    height: 120,
     backgroundColor: '#fff',
     borderRadius: 5,
     flexDirection: 'row',

@@ -14,7 +14,13 @@ import {
 } from '../../constants/fonts/index';
 const {width, height} = Dimensions.get('window');
 
-import {mostPopular, dummyData, dummyData2, locationPopular} from './dummy';
+import {
+  mostPopular,
+  dummyData,
+  dummyData2,
+  locationPopular,
+  allFood,
+} from './dummy';
 
 import SliderHome from './components/SliderHome';
 import Card from './components/Card';
@@ -40,9 +46,7 @@ export default ({navigation}: any) => {
               Most Popular
             </Text>
             <TouchableOpacity
-              onPress={() =>
-                navigation.navigate('AllFood', {item: mostPopular})
-              }>
+              onPress={() => navigation.navigate('AllFood', {item: allFood})}>
               <Text style={{...subtitleFood, color: 'grey'}}>See all</Text>
             </TouchableOpacity>
           </View>
@@ -55,7 +59,7 @@ export default ({navigation}: any) => {
               horizontal
               data={mostPopular}
               renderItem={({item, key}: any) => (
-                <Card {...{item}} {...{key}} {...{navigation}} />
+                <Card {...{item, key, navigation}} />
               )}
             />
           </View>
@@ -72,9 +76,7 @@ export default ({navigation}: any) => {
               showsHorizontalScrollIndicator={false}
               horizontal
               data={dummyData2}
-              renderItem={({item, key}: any) => (
-                <CardMini {...{item}} key={key} />
-              )}
+              renderItem={({item, key}: any) => <CardMini {...{item, key}} />}
             />
           </View>
           <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
@@ -92,7 +94,7 @@ export default ({navigation}: any) => {
               horizontal
               data={locationPopular}
               renderItem={({item, key}: any) => (
-                <LocationCard {...{item}} key={key} />
+                <LocationCard {...{item, key}} />
               )}
             />
           </View>

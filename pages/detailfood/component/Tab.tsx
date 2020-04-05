@@ -27,25 +27,6 @@ export default ({route, navigation}: any) => {
   return (
     <SafeAreaView>
       <StatusBar translucent barStyle="dark-content" />
-      <TouchableOpacity
-        onPress={() => navigation.goBack()}
-        style={styles.buttonBack}>
-        <FontAwesomeIcon icon={faChevronLeft} color="#fff" size={25} />
-      </TouchableOpacity>
-      <View style={{width, height: 300, backgroundColor: 'red'}}>
-        <Image source={{uri: item.url}} style={{flex: 1}} />
-      </View>
-      <View style={styles.buttonTop}>
-        <TouchableOpacity>
-          <Text style={styles.activeTab}>About</Text>
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Text style={styles.inActiveTab}>Review</Text>
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Text style={styles.inActiveTab}>Gallery</Text>
-        </TouchableOpacity>
-      </View>
       <View style={styles.middleContainer}>
         <View style={styles.mapContainer}>
           <Image

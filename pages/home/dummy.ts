@@ -90,3 +90,27 @@ export const locationPopular = [
     title: 'Ngopi kuy',
   },
 ];
+
+export const allFood = [
+  {
+    id: 1,
+    url:
+      'https://images.unsplash.com/photo-1542444256-9dd3e45c9b81?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1035&q=80',
+    title: 'Arabian Salad',
+    place: 8,
+  },
+  {
+    id: 2,
+    url:
+      'https://images.unsplash.com/photo-1506354666786-959d6d497f1a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80',
+    title: 'Paperoni Pizza',
+    place: 12,
+  },
+  {
+    id: 3,
+    url:
+      'https://images.unsplash.com/photo-1484723091739-30a097e8f929?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=687&q=80',
+    title: 'Toast bread with blueberry ',
+    place: 8,
+  },
+];

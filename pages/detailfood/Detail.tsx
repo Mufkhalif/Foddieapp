@@ -19,6 +19,8 @@ import {
   faWallet,
 } from '@fortawesome/free-solid-svg-icons';
 
+import Tab from './component/Tab';
+
 const {width, height} = Dimensions.get('window');
 
 export default ({route, navigation}: any) => {
@@ -46,70 +48,7 @@ export default ({route, navigation}: any) => {
           <Text style={styles.inActiveTab}>Gallery</Text>
         </TouchableOpacity>
       </View>
-      <View style={styles.middleContainer}>
-        <View style={styles.mapContainer}>
-          <Image
-            source={{
-              uri:
-                'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQKA-XOTjgZsQwDxNEYwUCkqvtaOr-_8hwpfusutYlsxuWly5-c&usqp=CAU',
-            }}
-            style={{flex: 1}}
-          />
-        </View>
-        <View style={styles.rightTab}>
-          <Text style={styles.rightTitle}>{item.title}</Text>
-          <View
-            style={{flexDirection: 'row', alignItems: 'center', marginTop: 6}}>
-            <FontAwesomeIcon icon={faMapMarkerAlt} color="#ccc" size={16} />
-            <Text
-              style={{
-                fontFamily: 'Poppins',
-                marginLeft: 5,
-                color: 'grey',
-                fontSize: 12,
-              }}>
-              Tebet Barat
-            </Text>
-          </View>
-          <View style={styles.containerSchadule}>
-            <Text
-              style={{
-                fontFamily: 'Poppins',
-                marginLeft: 5,
-                color: '#56ABE1',
-                fontSize: 13,
-              }}>
-              OPEN 9:30 AM to 10.30 PM
-            </Text>
-          </View>
-        </View>
-      </View>
-      <View style={styles.containerLast}>
-        <View style={styles.containerContentLast}>
-          <FontAwesomeIcon icon={faPhone} color="#ccc" size={24} />
-          <View style={{flexDirection: 'column', padding: 10, flex: 2}}>
-            <Text style={styles.titleContent}>Contact</Text>
-            <Text style={styles.subContent}>+621923898293</Text>
-          </View>
-          <View style={styles.buttonCall}>
-            <Text style={styles.titleCall}>Call</Text>
-          </View>
-        </View>
-        <View style={styles.containerContentLast}>
-          <FontAwesomeIcon icon={faBoxOpen} color="#ccc" size={24} />
-          <View style={{flexDirection: 'column', padding: 10, flex: 2}}>
-            <Text style={styles.titleContent}>Cuisines</Text>
-            <Text style={styles.subContent}>asia, thai, korean</Text>
-          </View>
-        </View>
-        <View style={styles.containerContentLast}>
-          <FontAwesomeIcon icon={faWallet} color="#ccc" size={24} />
-          <View style={{flexDirection: 'column', padding: 10, flex: 2}}>
-            <Text style={styles.titleContent}>Average Cost</Text>
-            <Text style={styles.subContent}>Rp 3.000 - Rp. 200.000</Text>
-          </View>
-        </View>
-      </View>
+      <Tab {...{route, navigation}} />
     </SafeAreaView>
   );
 };

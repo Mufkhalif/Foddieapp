@@ -45,35 +45,18 @@ export default ({navigation, route}: any) => {
           fontSize: 20,
           marginLeft: 10,
           marginTop: 10,
-          backgroundColor: 'red',
+          // backgroundColor: 'red',
         }}>
         All food
       </Text>
       <FlatList
         showsHorizontalScrollIndicator={false}
         data={list}
-        renderItem={({item, key}: any) => (
-          <Card {...{item}} id={key + 1} {...{navigation}} />
-        )}
+        renderItem={({item, key}: any) => <Card {...{item, key, navigation}} />}
       />
-      {/* {list.map((item: any, key: number) => {
-        return <Card id={key + 1} {...{item}} />;
-      })} */}
     </View>
   );
 };
-
-interface FoodI {
-  id: number;
-  item: FoodType;
-}
-
-interface FoodType {
-  id?: number;
-  url: string;
-  title: string;
-  place: number;
-}
 
 const styles = StyleSheet.create({
   leftContent: {
