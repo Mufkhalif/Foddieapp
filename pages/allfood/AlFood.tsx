@@ -50,7 +50,7 @@ export default ({navigation, route}: any) => {
         All food
       </Text>
       <FlatList
-        showsHorizontalScrollIndicator={false}
+        showsVerticalScrollIndicator={false}
         data={list}
         renderItem={({item, key}: any) => <Card {...{item, key, navigation}} />}
       />

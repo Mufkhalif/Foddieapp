@@ -1,41 +1,19 @@
 import * as React from 'react';
-import {
-  SafeAreaView,
-  Text,
-  Dimensions,
-  StatusBar,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {TouchableOpacity, View} from 'react-native';
 
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {
-  faBars,
   faCompass,
   faHome,
   faUser,
   faHeart,
-  faSearch,
-  faBell,
 } from '@fortawesome/free-solid-svg-icons';
 
-export default function MyTabBar({
-  state,
-  descriptors,
-  navigation,
-  position,
-}: any) {
+export default function MyTabBar({state, descriptors, navigation}: any) {
   return (
     <View style={{flexDirection: 'row', paddingTop: 20}}>
       {state.routes.map((route: any, index: number) => {
         const {options} = descriptors[route.key];
-        const label =
-          options.tabBarLabel !== undefined
-            ? options.tabBarLabel
-            : options.title !== undefined
-            ? options.title
-            : route.name;
 
         const isFocused = state.index === index;
 

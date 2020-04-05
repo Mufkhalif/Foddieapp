@@ -1,63 +1,41 @@
 import * as React from 'react';
-import {useState} from 'react';
-import {
-  View,
-  Text,
-  Dimensions,
-  StatusBar,
-  Image,
-  TouchableOpacity,
-  StyleSheet,
-} from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
+import {View, Text, Dimensions, Image, StyleSheet} from 'react-native';
 
-import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
-import {faChevronLeft, faHeart} from '@fortawesome/free-solid-svg-icons';
+import {useSpringTransition} from 'react-native-redash';
+import Animated, {interpolate} from 'react-native-reanimated';
 
-import Tab from './component/Tab';
-import GeneralStatusBarColor from '../../basecomponents/GeneralStatusBarColor';
+const {width, height} = Dimensions.get('window');
 
-const {width} = Dimensions.get('window');
+export default ({tab, active, initialName}: any) => {
+  const [condition, setCondition] = React.useState<true | false>(
+    active == initialName ? true : false,
+  );
 
-export default ({route, navigation}: any) => {
-  const {item} = route.params;
-  const [active, setActive] = useState('about');
+  const status = useSpringTransition(active == initialName ? true : false);
+
+  console.log(active);
+  console.log('--------');
+  console.log(initialName);
+
+  const transX = interpolate(status, {
+    inputRange: [0, 1],
+    outputRange: [-500, 0],
+  });
+
+  React.useEffect(() => {});
+  // console.log(condition);
+
+  React.useEffect(() => {
+    setCondition(true);
+    return () => {
+      setCondition(false);
+    };
+  });
+
   return (
-    <SafeAreaView>
-      <View
-        style={{
-          position: 'absolute',
-          width,
-          paddingHorizontal: 20,
-          paddingTop: 10,
-          zIndex: 2,
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-        }}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <FontAwesomeIcon icon={faChevronLeft} color="#fff" size={25} />
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={{backgroundColor: '#fff', padding: 10, borderRadius: 30}}>
-          <FontAwesomeIcon icon={faHeart} color="red" size={18} />
-        </TouchableOpacity>
-      </View>
-      <View style={{width, height: 300, backgroundColor: 'red'}}>
-        <Image source={{uri: item.url}} style={{flex: 1}} />
-      </View>
-      <View style={styles.buttonTop}>
-        <TouchableOpacity onPress={() => setActive('about')}>
-          <Text style={styles.activeTab}>About</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => setActive('review')}>
-          <Text style={styles.inActiveTab}>Review</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => setActive('gallery')}>
-          <Text style={styles.inActiveTab}>Gallery</Text>
-        </TouchableOpacity>
-      </View>
-      <Tab {...{route, navigation, active}} />
-    </SafeAreaView>
+    <Animated.View style={{transform: [{translateX: transX}]}}>
+      {tab}
+    </Animated.View>
   );
 };
 

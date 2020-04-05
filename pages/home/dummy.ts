@@ -113,4 +113,32 @@ export const allFood = [
     title: 'Toast bread with blueberry ',
     place: 8,
   },
+  {
+    id: 4,
+    url:
+      'https://images.unsplash.com/photo-1482049016688-2d3e1b311543?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
+    title: 'Eggs with beef ',
+    place: 28,
+  },
+  {
+    id: 5,
+    url:
+      'https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
+    title: 'Salad with onion Oilf ',
+    place: 28,
+  },
+  {
+    id: 6,
+    url:
+      'https://images.unsplash.com/photo-1432139555190-58524dae6a55?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
+    title: 'Grilled Steak ',
+    place: 28,
+  },
+  {
+    id: 7,
+    url:
+      'https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
+    title: 'Sushi with Teriyaki',
+    place: 28,
+  },
 ];

@@ -65,7 +65,8 @@ export default ({key, item, navigation, id}: FoodI) => {
   }, [setOpen]);
 
   return (
-    <TouchableWithoutFeedback onPress={() => console.log('selamat datang')}>
+    <TouchableWithoutFeedback
+      onPress={() => navigation.navigate('Detail', {item})}>
       <Animated.View
         style={{
           ...styles.card,
