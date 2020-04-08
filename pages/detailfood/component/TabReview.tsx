@@ -1,12 +1,7 @@
 import * as React from 'react';
 import {View, Text, Dimensions, Image, StyleSheet} from 'react-native';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
-import {
-  faMapMarkerAlt,
-  faPhone,
-  faBoxOpen,
-  faWallet,
-} from '@fortawesome/free-solid-svg-icons';
+import {faStar} from '@fortawesome/free-solid-svg-icons';
 
 import {useSpringTransition} from 'react-native-redash';
 import Animated, {
@@ -16,6 +11,7 @@ import Animated, {
 } from 'react-native-reanimated';
 
 import SpringContainer from './SpringContainer';
+import {titleFood} from '../../../constants/fonts';
 
 const {width, height} = Dimensions.get('window');
 
@@ -32,67 +28,54 @@ export default ({route, navigation, active}: any) => {
   return (
     <Animated.View style={{transform: [{translateX: transX}]}}>
       <View style={styles.middleContainer}>
-        <View style={styles.mapContainer}>
-          <Image
-            source={{
-              uri:
-                'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQKA-XOTjgZsQwDxNEYwUCkqvtaOr-_8hwpfusutYlsxuWly5-c&usqp=CAU',
-            }}
-            style={{flex: 1}}
-          />
-        </View>
-        <View style={styles.rightTab}>
-          <Text style={styles.rightTitle}>Review</Text>
+        <View style={styles.headerCard}>
+          <View style={styles.imageContainer}>
+            <Image
+              source={{
+                uri:
+                  'https://images.unsplash.com/photo-1586232903370-8bca5d0e3c50?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
+              }}
+              style={{flex: 1}}
+            />
+          </View>
           <View
-            style={{flexDirection: 'row', alignItems: 'center', marginTop: 6}}>
-            <FontAwesomeIcon icon={faMapMarkerAlt} color="#ccc" size={16} />
-            <Text
-              style={{
-                fontFamily: 'Poppins',
-                marginLeft: 5,
-                color: 'grey',
-                fontSize: 12,
-              }}>
-              Tebet Barat
-            </Text>
-          </View>
-          <View style={styles.containerSchadule}>
-            <Text
-              style={{
-                fontFamily: 'Poppins',
-                marginLeft: 5,
-                color: '#56ABE1',
-                fontSize: 13,
-              }}>
-              OPEN 9:30 AM to 10.30 PM
-            </Text>
-          </View>
-        </View>
-      </View>
-      <View style={styles.containerLast}>
-        <View style={styles.containerContentLast}>
-          <FontAwesomeIcon icon={faPhone} color="#ccc" size={24} />
-          <View style={{flexDirection: 'column', padding: 10, flex: 2}}>
-            <Text style={styles.titleContent}>Contact</Text>
-            <Text style={styles.subContent}>+621923898293</Text>
+            style={{
+              marginLeft: 10,
+              flexDirection: 'column',
+            }}>
+            <Text style={styles.fontUser}>Jhonson walker</Text>
+            <View style={{flexDirection: 'row'}}>
+              <Text style={styles.fontReview}>130 Reviews</Text>
+              <Text style={styles.fontFollower}>2k Followers</Text>
+            </View>
           </View>
           <View style={styles.buttonCall}>
-            <Text style={styles.titleCall}>Call</Text>
+            <Text style={styles.titleCall}>Follow</Text>
           </View>
         </View>
-        <View style={styles.containerContentLast}>
-          <FontAwesomeIcon icon={faBoxOpen} color="#ccc" size={24} />
-          <View style={{flexDirection: 'column', padding: 10, flex: 2}}>
-            <Text style={styles.titleContent}>Cuisines</Text>
-            <Text style={styles.subContent}>asia, thai, korean</Text>
+        <View style={{marginRight: 5, flexDirection: 'row', marginTop: 5}}>
+          <View style={{marginRight: 5}}>
+            <FontAwesomeIcon icon={faStar} color={'#FFC357'} size={15} />
+          </View>
+          <View style={{marginRight: 5}}>
+            <FontAwesomeIcon icon={faStar} color={'#FFC357'} size={15} />
+          </View>
+          <View style={{marginRight: 5}}>
+            <FontAwesomeIcon icon={faStar} color={'#FFC357'} size={15} />
+          </View>
+          <View style={{marginRight: 5}}>
+            <FontAwesomeIcon icon={faStar} color={'#FFC357'} size={15} />
+          </View>
+          <View style={{marginRight: 5}}>
+            <FontAwesomeIcon icon={faStar} color={'#ccc'} size={15} />
           </View>
         </View>
-        <View style={styles.containerContentLast}>
-          <FontAwesomeIcon icon={faWallet} color="#ccc" size={24} />
-          <View style={{flexDirection: 'column', padding: 10, flex: 2}}>
-            <Text style={styles.titleContent}>Average Cost</Text>
-            <Text style={styles.subContent}>Rp 3.000 - Rp. 200.000</Text>
-          </View>
+        <View style={{height: 80, marginTop: 5}}>
+          <Text style={{textAlign: 'left'}}>
+            readable content of a page when looking at its layout. The point of
+            using Lorem Ip using Lorem Ipsum is that it has a more-or-less
+            normal dis like).
+          </Text>
         </View>
       </View>
     </Animated.View>
@@ -100,42 +83,19 @@ export default ({route, navigation, active}: any) => {
 };
 
 const styles = StyleSheet.create({
-  buttonBack: {
-    top: 10,
-    position: 'absolute',
-    zIndex: 20,
-    left: 10,
-    padding: 10,
-  },
-  containerLast: {
+  middleContainer: {
     marginTop: 10,
-    width: width - 30,
-    backgroundColor: '#fff',
-    height: 210,
     alignSelf: 'center',
+    // height: 260,
+    backgroundColor: '#fff',
+    width: width - 30,
+    marginHorizontal: 20,
     borderRadius: 5,
+    padding: 10,
     shadowOffset: {width: 5, height: 4},
     shadowColor: '#DBDDEC',
     shadowOpacity: 0.5,
     shadowRadius: 2,
-  },
-  containerContentLast: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical: 1,
-    paddingHorizontal: 15,
-    justifyContent: 'space-between',
-  },
-  titleContent: {
-    marginLeft: 5,
-    fontFamily: 'Poppins-Bold',
-    fontSize: 16,
-    color: '#333',
-  },
-  subContent: {
-    marginLeft: 5,
-    fontFamily: 'Poppins',
-    fontSize: 14,
   },
   buttonCall: {
     backgroundColor: '#C1E6E6',
@@ -145,66 +105,31 @@ const styles = StyleSheet.create({
   },
   titleCall: {
     color: '#71C7AF',
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: 'bold',
   },
-  buttonTop: {
-    paddingVertical: 10,
-    paddingHorizontal: 50,
-    alignSelf: 'center',
-    backgroundColor: '#fff',
-    width: width - 25,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop: -25,
-    borderRadius: 20,
-    shadowOffset: {width: 5, height: 4},
-    shadowColor: '#DBDDEC',
-    shadowOpacity: 0.5,
-    shadowRadius: 2,
-  },
-  middleContainer: {
-    marginTop: 10,
-    alignSelf: 'center',
-    height: 150,
-    backgroundColor: '#fff',
-    width: width - 30,
-    marginHorizontal: 20,
-    borderRadius: 5,
-    flexDirection: 'row',
-    padding: 10,
-    shadowOffset: {width: 5, height: 4},
-    shadowColor: '#DBDDEC',
-    shadowOpacity: 0.5,
-    shadowRadius: 2,
-  },
-  mapContainer: {
-    width: 120,
-    backgroundColor: 'red',
-    borderRadius: 5,
-    overflow: 'hidden',
-  },
-  containerSchadule: {
-    bottom: 0,
+  headerCard: {
+    height: 60,
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#C8E4FA',
-    paddingVertical: 5,
-    paddingHorizontal: 10,
-    borderRadius: 5,
   },
-  activeTab: {fontFamily: 'Poppins-Bold', fontSize: 15, color: '#333'},
-  inActiveTab: {fontFamily: 'Poppins-Medium', fontSize: 15, color: '#333'},
-  rightTab: {
-    flexDirection: 'column',
-    marginLeft: 10,
-    justifyContent: 'space-between',
-    marginTop: 5,
+  imageContainer: {
+    width: 50,
+    height: 50,
+    backgroundColor: 'grey',
+    borderRadius: 25,
+    overflow: 'hidden',
   },
-  rightTitle: {
-    fontFamily: 'Poppins-Bold',
-    fontSize: 18,
+  fontReview: {
+    fontSize: 12,
+    fontFamily: 'Poppins',
     color: '#333',
-    width: 150,
   },
+  fontFollower: {
+    marginLeft: 10,
+    fontSize: 12,
+    fontFamily: 'Poppins',
+    color: '#333',
+  },
+  fontUser: {...titleFood, color: '#333', fontSize: 16, width: 190},
 });

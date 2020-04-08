@@ -1,13 +1,6 @@
 import * as React from 'react';
 import {useState, useEffect} from 'react';
-import {
-  View,
-  Text,
-  Dimensions,
-  Image,
-  FlatList,
-  StyleSheet,
-} from 'react-native';
+import {View, Text, Dimensions, Image, StyleSheet} from 'react-native';
 import {useTimingTransition, useSpringTransition} from 'react-native-redash';
 import Animated, {
   Value,
@@ -92,19 +85,12 @@ export default ({key, item, navigation, id}: FoodI) => {
               Rp. 32.000
             </Text>
           </View>
-          <TouchableOpacity>
-            <View
-              style={{
-                marginTop: 10,
-                backgroundColor: '#FFC357',
-                width: 50,
-                alignItems: 'center',
-                paddingVertical: 5,
-                borderRadius: 5,
-              }}>
+          <TouchableNativeFeedback
+            onPress={() => console.log('Selamat datang')}>
+            <View style={styles.buttonBuy}>
               <Text>Buy</Text>
             </View>
-          </TouchableOpacity>
+          </TouchableNativeFeedback>
         </View>
       </Animated.View>
     </TouchableWithoutFeedback>
@@ -133,5 +119,13 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'flex-start',
     marginTop: 10,
+  },
+  buttonBuy: {
+    marginTop: 10,
+    backgroundColor: '#FFC357',
+    width: 50,
+    alignItems: 'center',
+    paddingVertical: 5,
+    borderRadius: 5,
   },
 });

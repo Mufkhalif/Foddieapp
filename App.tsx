@@ -21,7 +21,7 @@ import Location from './pages/location/';
 import Favourite from './pages/favourite/';
 import Account from './pages/account/';
 import Detail from './pages/detailfood/Detail';
-import AllFood from './pages/allfood/AlFood';
+import AllFood from './pages/allfood/AllFood';
 
 const {width} = Dimensions.get('window');
 const Tab = createMaterialTopTabNavigator();
