@@ -22,6 +22,7 @@ import Favourite from './pages/favourite/';
 import Account from './pages/account/';
 import Detail from './pages/detailfood/Detail';
 import AllFood from './pages/allfood/AllFood';
+import Neumorphic from './pages/neomorphic/index';
 
 const {width} = Dimensions.get('window');
 const Tab = createMaterialTopTabNavigator();
@@ -54,10 +55,11 @@ const App = () => {
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#fff'}}>
       <NavigationContainer>
-        <Stack.Navigator headerMode="none" initialRouteName="HomeScreen">
+        <Stack.Navigator headerMode="none" initialRouteName="Neumorphic">
           <Stack.Screen name="Detail" component={Detail} />
           <Stack.Screen name="HomeScreen" component={HomeScreen} />
           <Stack.Screen name="AllFood" component={AllFood} />
+          <Stack.Screen name="Neumorphic" component={Neumorphic} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaView>

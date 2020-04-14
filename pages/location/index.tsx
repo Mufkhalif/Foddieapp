@@ -1,92 +1,87 @@
 import React from 'react';
-import {StyleSheet, View, Dimensions} from 'react-native';
+import {StyleSheet, Text, View, Dimensions} from 'react-native';
 import Animated from 'react-native-reanimated';
 import {PanGestureHandler, State} from 'react-native-gesture-handler';
-const {width} = Dimensions.get('window');
+const {width, height} = Dimensions.get('window');
 
-const {cond, eq, add, call, set, Value, event} = Animated;
+import {onGestureEvent} from 'react-native-redash';
 
-export default class Example extends React.Component {
-  constructor(props) {
-    super(props);
-    this.dragX = new Value(0);
-    this.dragY = new Value(0);
-    this.offsetX = new Value(width / 2);
-    this.offsetY = new Value(100);
-    this.gestureState = new Value(-1);
-    this.onGestureEvent = event([
-      {
-        nativeEvent: {
-          translationX: this.dragX,
-          translationY: this.dragY,
-          state: this.gestureState,
-        },
-      },
-    ]);
+const {
+  cond,
+  eq,
+  add,
+  call,
+  set,
+  Value,
+  event,
+  interpolate,
+  Extrapolate,
+  block,
+} = Animated;
 
-    this.addY = add(this.offsetY, this.dragY);
-    this.addX = add(this.offsetX, this.dragX);
+export default function App() {
+  const dragY = new Value(0);
+  const dragX = new Value(0);
+  const offsetY = new Value(width / 2);
+  const offsetX = new Value(100);
+  const gestureState = new Value(-1);
+  const translationX = new Value(0);
+  const velocityX = new Value(0);
+  const state = new Value(State.UNDETERMINED);
 
-    this.transX = cond(
-      eq(this.gestureState, State.ACTIVE),
-      this.addX,
-      set(this.offsetX, this.addX),
-    );
+  const addY = add(offsetY, dragY);
+  const addX = add(offsetX, dragX);
 
-    this.transY = cond(eq(this.gestureState, State.ACTIVE), this.addY, [
-      set(this.offsetY, this.addY),
-    ]);
-  }
+  const gestureHandler = onGestureEvent({
+    translationX,
+    velocityX,
+    state,
+  });
 
-  onDrop = ([x, y]) => {
-    alert(`You dropped at x: ${x} and y: ${y}!`);
+  const onDrop = () => {
+    console.log('hello');
   };
 
-  render() {
-    return (
-      <View style={styles.container}>
-        <Animated.Code>
-          {() =>
-            cond(
-              eq(this.gestureState, State.END),
-              call([this.addX, this.addY], this.onDrop),
-            )
-          }
-        </Animated.Code>
-        <PanGestureHandler
-          maxPointers={1}
-          minDist={10}
-          onGestureEvent={this.onGestureEvent}
-          onHandlerStateChange={this.onGestureEvent}>
-          <Animated.View
-            style={[
-              styles.box,
-              {
-                transform: [
-                  {
-                    translateX: this.transX,
-                  },
-                  {
-                    translateY: this.transY,
-                  },
-                ],
-              },
-            ]}
-          />
-        </PanGestureHandler>
-      </View>
-    );
-  }
+  const transY = cond(eq(state, State.ACTIVE), addY, [
+    cond(eq(state, State.END), call([addX, addY], onDrop)),
+    set(offsetY, addY),
+  ]);
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.dropZone} />
+      <PanGestureHandler minDist={0} {...gestureHandler}>
+        <Animated.View
+          style={[
+            styles.box,
+            {
+              transform: [
+                {
+                  translateX: translationX,
+                },
+              ],
+            },
+          ]}
+        />
+      </PanGestureHandler>
+    </View>
+  );
 }
-
 const CIRCLE_SIZE = 70;
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  dropZone: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: 'rgba(0,0,0,.2)',
+    height: '50%',
+  },
   box: {
-    backgroundColor: 'tomato',
+    backgroundColor: 'salmon',
     position: 'absolute',
     marginLeft: -(CIRCLE_SIZE / 2),
     marginTop: -(CIRCLE_SIZE / 2),
