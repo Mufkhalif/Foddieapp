@@ -1,97 +1,116 @@
 import * as React from 'react';
 import {useState, useEffect} from 'react';
-import {
-  View,
-  Text,
-  Dimensions,
-  Image,
-  FlatList,
-  StyleSheet,
-} from 'react-native';
-import {useTimingTransition} from 'react-native-redash';
+import {View, Text, Dimensions, FlatList, StyleSheet} from 'react-native';
 import Animated, {
   Value,
   interpolate,
   Extrapolate,
+  useCode,
+  block,
+  cond,
+  timing,
+  Clock,
+  clockRunning,
+  not,
+  add,
+  set,
 } from 'react-native-reanimated';
 
 import {
-  titleFood,
-  subtitleFood,
-  subsemititleFood,
-  descRegion,
-} from '../../constants/fonts/index';
-
-import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
-import {faSearch} from '@fortawesome/free-solid-svg-icons';
-import {
-  TouchableNativeFeedback,
-  TouchableWithoutFeedback,
+  PanGestureHandler,
+  State,
+  TouchableOpacity,
 } from 'react-native-gesture-handler';
+import {
+  onGestureEvent,
+  withSpring,
+  clamp,
+  withTimingTransition,
+} from 'react-native-redash';
 
 import Card from './component/Card';
 
-const {width} = Dimensions.get('window');
+const {width, height} = Dimensions.get('window');
+
+const snapTop = height - 40;
 
 export default ({navigation, route}: any) => {
-  const [list, setList] = useState(route.params.item);
+  const list = route.params.item;
+  const state = new Value(State.UNDETERMINED);
+  const translationY = new Value(0);
+  const velocityY = new Value(0);
+  const offset = new Value(600);
+  const goUp: Animated.Value<0 | 1> = new Value(0);
+  const goDown: Animated.Value<0 | 1> = new Value(0);
+
+  const config = {
+    damping: 15,
+    mass: 1,
+    stiffness: 150,
+    overshootClamping: false,
+    restSpeedThreshold: 0.1,
+    restDisplacementThreshold: 0.1,
+  };
+
+  const gestureHandler = onGestureEvent({
+    state,
+    translationY,
+    velocityY,
+  });
+
+  const translateY = withSpring({
+    offset,
+    value: translationY,
+    velocity: velocityY,
+    state,
+    snapPoints: [0, 600],
+    config,
+  });
+
+  const val = cond(1, set(goUp, 0));
+
+  const clock = new Clock();
+  const [animated, setAnimated] = React.useState(1);
+
+  useCode(() => cond(animated, set(offset, 600), [set(offset, 0)]), []);
 
   return (
-    <View style={{alignSelf: 'center'}}>
-      <View
-        style={{
-          height: 40,
-          flexDirection: 'row',
-          marginVertical: 10,
-          marginBottom: 10,
-        }}>
-        <View
+    <>
+      <PanGestureHandler {...gestureHandler}>
+        <Animated.View
           style={{
-            flex: 3,
-            backgroundColor: '#fff',
-            borderRadius: 5,
-            borderWidth: 1,
-            borderColor: '#ccc',
-            paddingHorizontal: 10,
-            justifyContent: 'center',
+            zIndex: 10,
+            position: 'absolute',
+            width,
+            height,
+            backgroundColor: '#FFC357',
+            transform: [{translateY}],
           }}>
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
-            <FontAwesomeIcon icon={faSearch} color={'#ccc'} size={14} />
-            <Text style={{marginLeft: 10, color: '#ccc'}}>Search</Text>
-          </View>
+          <TouchableOpacity onPress={() => setAnimated(0)}>
+            <Text>close tab</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => setAnimated(1)}>
+            <Text>Open tab</Text>
+          </TouchableOpacity>
+        </Animated.View>
+      </PanGestureHandler>
+      <View style={{alignSelf: 'center'}}>
+        <View style={{margin: 10}}>
+          <Text style={{fontFamily: 'Poppins-Bold', fontSize: 20}}>
+            All Food
+          </Text>
         </View>
-        <View style={{flex: 1}}></View>
+
+        <FlatList
+          showsVerticalScrollIndicator={false}
+          data={list}
+          renderItem={({item, key}: any) => (
+            <Card {...{item, key, navigation}} />
+          )}
+        />
       </View>
-      <FlatList
-        showsVerticalScrollIndicator={false}
-        data={list}
-        renderItem={({item, key}: any) => <Card {...{item, key, navigation}} />}
-      />
-    </View>
+    </>
   );
 };
 
-const styles = StyleSheet.create({
-  leftContent: {
-    alignSelf: 'center',
-    width: 90,
-    height: 90,
-    backgroundColor: 'red',
-    marginHorizontal: 10,
-    borderRadius: 10,
-    overflow: 'hidden',
-  },
-  card: {
-    marginTop: 10,
-    width: width - 15,
-    height: 110,
-    backgroundColor: '#fff',
-    borderRadius: 5,
-    flexDirection: 'row',
-  },
-  rightContent: {
-    flexDirection: 'column',
-    justifyContent: 'flex-start',
-    marginTop: 10,
-  },
-});
+const styles = StyleSheet.create({});

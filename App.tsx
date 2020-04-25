@@ -55,7 +55,7 @@ const App = () => {
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#fff'}}>
       <NavigationContainer>
-        <Stack.Navigator headerMode="none" initialRouteName="Neumorphic">
+        <Stack.Navigator headerMode="none" initialRouteName="HomeScreen">
           <Stack.Screen name="Detail" component={Detail} />
           <Stack.Screen name="HomeScreen" component={HomeScreen} />
           <Stack.Screen name="AllFood" component={AllFood} />

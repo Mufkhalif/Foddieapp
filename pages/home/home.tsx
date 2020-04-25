@@ -34,7 +34,25 @@ export default ({navigation}: any) => {
 
   console.disableYellowBox = true;
 
-  // const listReft = React.useRef('');
+  React.useEffect(() => {
+    fetch('http://192.168.0.102/api/masjid/getMasjid', {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+        Accept: 'application/json',
+        TTOKEN:
+          'eyJpdiI6ImJHWDVWQktZTUduc0RwdUt2Kytjc2c9PSIsInZhbHVlIjoiYXVQZVNZZ25UeXdjNTZjMkxxeW5JTWFZdHVzVnNkT0lndVwvTm1XNGZFQ1NCc2E1R056bzZJM05cL0huRFlERmJVaWRVZ2JOeGU2VjdLVEtqZWlOd1U5Q2U0MG8wOWpFVk9DbERtbkVyY2w4dVNLdWk5OG5Jek9qa1g3MFA5aEZCaCIsIm1hYyI6Ijg4MjJhYjhkNGFjMDEzOWZhMmRjMWJjNjFiNTVlMjlkMjM5ZDE2OWVlZGNhMTJkNTNhMWVhNTdhMzJlMzk1YzIifQ==',
+      },
+      body: JSON.stringify({
+        offset: 2,
+        keyword: 'istiqlal',
+      }),
+    })
+      .then((Response) => Response.json())
+      .then((res) => {
+        console.log(res);
+      });
+  }, []);
 
   return (
     <ScrollView showsHorizontalScrollIndicator={false}>
